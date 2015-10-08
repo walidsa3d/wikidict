@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name="wikidict",
-    version="0.1.0",
+    version="1.0.0",
     description="Wikipedia at your fingertips",
     long_description=read_md('README.md'),
     author="Walid Saad",
@@ -21,6 +21,7 @@ setup(
     test_suite="nose.collector",
     license="mit",
     zip_safe=False,
+    entry_points={"console_scripts": ["wikidict=wikidict.wikidict:main"]},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

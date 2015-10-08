@@ -23,16 +23,18 @@ def get_summary(query):
     else:
         summary = "Not Found"
 
-script, query = argv
-spinner = itertools.cycle(['-', '/', '\\'])
-w = threading.Thread(name='worker', target=get_summary, args=(query,))
-w.start()
-os.system('setterm -cursor off')
 
-while w.isAlive():
-    stdout.write(spinner.next())  # write the next character
-    stdout.flush()                # flush stdout buffer
-    stdout.write('\b')
+def main():
+    script, query = argv
+    spinner = itertools.cycle(['-', '/', '\\'])
+    w = threading.Thread(name='worker', target=get_summary, args=(query,))
+    w.start()
+    os.system('setterm -cursor off')
 
-print summary
-os.system('setterm -cursor on')
+    while w.isAlive():
+        stdout.write(spinner.next())  # write the next character
+        stdout.flush()                # flush stdout buffer
+        stdout.write('\b')
+
+    print summary
+    os.system('setterm -cursor on')
