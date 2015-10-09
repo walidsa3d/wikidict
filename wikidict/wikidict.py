@@ -7,36 +7,52 @@ import threading
 import os
 import requests
 
-from sys import argv
+import argparse
+import textwrap
+
+import os
+
 from sys import stdout
-summary = ""
+from termcolor import colored
+
+SUMMARY = "Not Found"
 
 
 def get_summary(query):
-    global summary
-    url = "https://en.wikipedia.org/w/api.php?continue=&action=query&titles=%s&prop=extracts&exintro=&explaintext=&format=json&redirects" % query
+    global SUMMARY
+    url = "https://en.wikipedia.org/w/api.php?continue=&action=query&titles=%s&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2" % query
     response = requests.get(url).json()
     pages = response['query']['pages']
-    extract = pages[pages.keys()[0]].get('extract', None)
+    extract = pages[0].get('extract', None)
     if extract is not None:
-        summary = extract
-    else:
-        summary = "Not Found"
+        SUMMARY = extract
 
 
 def loading(spinner):
-    stdout.write(spinner.next())  # write the next character
-    stdout.flush()                # flush stdout buffer
+    stdout.write(spinner.next())
+    stdout.flush()
     stdout.write('\b')
 
 
 def main():
-    script, query = argv
-    spinner = itertools.cycle(['-', '/', '\\'])
+    parser = argparse.ArgumentParser(usage="-h for full usage")
+    parser.add_argument('query', help="search string", nargs="+")
+    parser.add_argument('-c','--color', action='store_true')
+    args = parser.parse_args()
+    query = ''.join(args.query).strip()
     worker = threading.Thread(name='worker', target=get_summary, args=(query,))
     worker.start()
     os.system('setterm -cursor off')
+    spinner = itertools.cycle(['-', '/', '\\'])
     while worker.isAlive():
         loading(spinner)
-    print summary
+    terminal_width = os.popen('stty size', 'r').read().split()[1]
+    text_width = 50*int(terminal_width)/100
+    summary = colored(SUMMARY, 'green', attrs=['bold'])
+    if args.color:
+        print textwrap.fill(summary, text_width, initial_indent='         ')
+    else:
+        print SUMMARY
     os.system('setterm -cursor on')
+
+main()
