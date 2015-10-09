@@ -12,15 +12,16 @@ import textwrap
 
 import os
 
+from .lancodes import codes
 from sys import stdout
 from termcolor import colored
 
 SUMMARY = "Not Found"
 
-
-def get_summary(query):
+def get_summary(query, lang):
     global SUMMARY
-    url = "https://en.wikipedia.org/w/api.php?continue=&action=query&titles=%s&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2" % query
+    url = "https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2".format(
+        lang=lang, query=query)
     response = requests.get(url).json()
     pages = response['query']['pages']
     extract = pages[0].get('extract', None)
@@ -37,10 +38,13 @@ def loading(spinner):
 def main():
     parser = argparse.ArgumentParser(usage="-h for full usage")
     parser.add_argument('query', help="search string", nargs="+")
-    parser.add_argument('-c','--color', action='store_true')
+    parser.add_argument('-c', '--color', action='store_true')
+    parser.add_argument('-l', '--lang', help="wikipedia\'s language")
     args = parser.parse_args()
+    lang = args.lang if args.lang in codes.keys() else 'en'
     query = ''.join(args.query).strip()
-    worker = threading.Thread(name='worker', target=get_summary, args=(query,))
+    worker = threading.Thread(
+        name='worker', target=get_summary, args=(query, lang))
     worker.start()
     os.system('setterm -cursor off')
     spinner = itertools.cycle(['-', '/', '\\'])
@@ -54,3 +58,4 @@ def main():
     else:
         print SUMMARY
     os.system('setterm -cursor on')
+

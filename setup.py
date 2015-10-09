@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name="wikidict",
-    version="1.1.1",
+    version="1.2.0",
     description="Wikipedia at your fingertips",
     long_description=read_md('README.md'),
     author="Walid Saad",
