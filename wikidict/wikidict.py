@@ -54,5 +54,3 @@ def main():
     else:
         print SUMMARY
     os.system('setterm -cursor on')
-
-main()
