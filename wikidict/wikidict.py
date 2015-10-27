@@ -1,32 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import itertools
-
-import threading
-
-import os
-import requests
-
-import argparse
-import textwrap
-
-import os
-
 from .lancodes import codes
 from sys import stdout
 from termcolor import colored
+import itertools
+import threading
+import os
+import requests
+import argparse
+import textwrap
+import os
 
-SUMMARY = "Not Found"
+class Info:                         # for test purpose
+    SUMMARY = "Not Found"
+    def __init__(self):
+        pass
 
 def get_summary(query, lang):
-    global SUMMARY
     url = "https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2".format(
         lang=lang, query=query)
     response = requests.get(url).json()
     pages = response['query']['pages']
     extract = pages[0].get('extract', None)
     if extract is not None:
-        SUMMARY = extract
+        Info.SUMMARY = extract
 
 
 def loading(spinner):
@@ -58,4 +55,3 @@ def main():
     else:
         print SUMMARY
     os.system('setterm -cursor on')
-
