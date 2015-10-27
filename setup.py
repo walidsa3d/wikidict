@@ -1,16 +1,22 @@
 from setuptools import find_packages
-from setuptools import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 try:
     from pypandoc import convert
     read_md = lambda f: convert(f, 'rst')
 except ImportError:
-    print "warning: pypandoc module not found, could not convert Markdown to RST"
+    print "warning: pypandoc module not found, could not convert \
+    Markdown to RST"
     read_md = lambda f: open(f, 'r').read()
 
 setup(
     name="wikidict",
     version="1.2.0",
+    install_requires=[
+        r for r in open('requirements.txt', 'r').read().split('\n') if r],
     description="Wikipedia at your fingertips",
     long_description=read_md('README.md'),
     author="Walid Saad",
