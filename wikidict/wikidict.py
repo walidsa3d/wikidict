@@ -49,9 +49,9 @@ def main():
         loading(spinner)
     terminal_width = os.popen('stty size', 'r').read().split()[1]
     text_width = 50*int(terminal_width)/100
-    summary = colored(SUMMARY, 'green', attrs=['bold'])
+    summary = colored(Info.SUMMARY, 'green', attrs=['bold'])
     if args.color:
         print textwrap.fill(summary, text_width, initial_indent='         ')
     else:
-        print SUMMARY
+        print Info.SUMMARY
     os.system('setterm -cursor on')
