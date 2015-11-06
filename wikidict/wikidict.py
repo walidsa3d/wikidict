@@ -9,12 +9,14 @@ import os
 import requests
 import argparse
 import textwrap
-import os
+
 
 class Info:                         # for test purpose
     SUMMARY = "Not Found"
+
     def __init__(self):
         pass
+
 
 def get_summary(query, lang):
     url = "https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2".format(
