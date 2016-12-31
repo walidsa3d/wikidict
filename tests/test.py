@@ -1,8 +1,15 @@
 import sys # noqa
 sys.path.append('../wikidict') # noqa
 
-from wikidict.wikidict import get_summary
+from wikidict.wikidict import WikipediaClient
 import unittest2
+
+
+# helper function
+def get_summary(query, lang):
+    wd = WikipediaClient(query, lang)
+    wd.make_query()
+    return wd.get_summary()
 
 
 class WikiddictTestCase(unittest2.TestCase):
