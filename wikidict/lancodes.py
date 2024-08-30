@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 codes = {
     'ab': 'Abkhazian',
     'ace': 'Acehnese',

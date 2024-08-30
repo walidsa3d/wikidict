@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "wikidict"
+version = "0.1.0"
+description = "Wikipedia at your fingertips"
+authors = ["walid <walid.sa3d@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.32.3"
+termcolor = "^2.4.0"
+click = "^8.1.7"
+rich = "^13.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
