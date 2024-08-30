@@ -10,14 +10,16 @@ from rich.text import Text
 from wikidict.lancodes import codes
 
 console = Console()
-
+BASE_URL = f"https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2"
 class Info:
     SUMMARY = "Not Found"
 
 def get_summary(query, lang):
-    url = f"https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2"
-    response = requests.get(url).json()
-    pages = response['query']['pages']
+    try:
+        response = requests.get(BASE_URL).json()
+        pages = response['query']['pages']
+    except Exception as e:
+        print("Failed to get page")
     extract = pages[0].get('extract', None)
     if extract is not None:
         Info.SUMMARY = extract
