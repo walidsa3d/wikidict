@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wikidict"
-version = "0.1.0"
+version = "0.2.0"
 description = "Wikipedia at your fingertips"
 authors = ["walid <walid.sa3d@gmail.com>"]
 license = "MIT"
@@ -18,3 +18,6 @@ pyhyphen = "^4.0.4"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+wikidict = "wikidict.main:main"
