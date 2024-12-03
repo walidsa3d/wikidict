@@ -1,15 +1,15 @@
-# WikiDict
+# Wikiluv
 
 Wikipedia at your fingertips.
 
 ## Installation
 ```bash
-pip install wikidict
+pip install wikiluv
 ```
 ## Usage
 ```bash
-wikidict rose
+wikiluv rose
 ```
 
 # Demo
-![demo](https://github.com/walidsa3d/wikidict/blob/master/wikidict.gif)
+![demo](https://github.com/walidsa3d/wikiluv/blob/master/wikiluv.gif)

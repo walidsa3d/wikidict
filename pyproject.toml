@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wikidict"
+name = "wikiluv"
 version = "0.2.0"
 description = "Wikipedia at your fingertips"
 authors = ["walid <walid.sa3d@gmail.com>"]
@@ -20,4 +20,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-wikidict = "wikidict.main:main"
+wikiluv = "wikiluv.main:main"

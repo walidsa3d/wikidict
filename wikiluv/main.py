@@ -7,8 +7,8 @@ import os
 from rich.console import Console
 from rich.spinner import Spinner
 from rich.text import Text
-from wikidict.lancodes import codes
-from wikidict.utils import justify
+from wikiluv.lancodes import codes
+from wikiluv.utils import justify
 
 console = Console()
 BASE_URL = "https://{lang}.wikipedia.org/w/api.php?continue=&action=query&titles={query}&prop=extracts&exintro=&explaintext=&format=json&redirects&formatversion=2"

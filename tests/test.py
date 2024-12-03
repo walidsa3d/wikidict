@@ -1,14 +1,14 @@
 import sys
-sys.path.append('../wikidict')
+sys.path.append('../wikiluv')
 
-from wikidict import *
+from wikiluv import *
 import unittest2
 import requests
 import sys
 
 class WikiddictTestCase(unittest2.TestCase):
 
-    """Tests for `wikidict/wikidict.py`."""
+    """Tests for `wikiluv/wikiluv.py`."""
 
     def setUp(self):
         self.query = "google"
